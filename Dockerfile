@@ -9,9 +9,6 @@ RUN apk update && apk add --no-cache git ca-certificates tzdata && update-ca-cer
 # Create appuser
 ENV GO111MODULE=on \
     CGO_ENABLED=0 \
-    GOOS=linux \
-    GOARCH=arm \
-    GOARM=7 \
     USER=appuser \
     UID=10001
 
