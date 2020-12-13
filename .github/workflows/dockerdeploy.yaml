@@ -1,0 +1,19 @@
+name: Docker build CI
+
+on:
+  push:
+    branches: [ master ]
+
+jobs:
+  build:
+
+    runs-on: ubuntu-latest
+
+  - name: Push to GitHub Packages
+      uses: docker/build-push-action@v1
+      with:
+          username: ${{ github.actor }}
+          password: ${{ secrets.GITHUB_TOKEN }}
+          registry: docker.pkg.github.com
+          repository: jnowakoski15/ simpleEndpoint
+          tag_with_ref: true
