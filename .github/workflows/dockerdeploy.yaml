@@ -28,6 +28,13 @@ jobs:
           username: ${{ secrets.DOCKERHUB_USERNAME }}
           password: ${{ secrets.DOCKERHUB_TOKEN }}
       -
+        name: Login to Private Repo
+        uses: docker/login-action@v1 
+        with:
+          registry: ${{ secrets.PRIVATE_REPO}}
+          username: ${{ secrets.PRIVATE_REPO_USER }}
+          password: ${{ secrets.PRIVATE_REPO_PASS }}
+      -
         name: Build and push
         id: docker_build
         uses: docker/build-push-action@v2
@@ -36,6 +43,7 @@ jobs:
           platforms: linux/arm/v7,linux/arm64/v8,linux/amd64
           tags: |
             jnowakoski/simple-endpoint:latest
+            ${{ secrets.PRIVATE_REPO }}/simple-endpoint:latest
      # ghcr.io/jnowakoski15/simple-endpoint:latest
       -
         name: Image digest
